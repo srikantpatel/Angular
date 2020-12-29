@@ -1,0 +1,97 @@
+<link href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+<!------ Include the above in your HEAD tag ---------->
+
+<div class="container">
+  <div class="row centered-form">
+    <div class="col-xs-12 col-sm-8 col-md-4 col-sm-offset-2 col-md-offset-4">
+      <div class="panel panel-default" style="width: 500px;">
+        <div class="panel-heading" style="background-color: #90ab5b;">
+          <h3 class="panel-title" style="margin-left: 76px; color:black">Please sign up for IVR<small style="color: blue;">It's free!</small></h3>
+        </div>
+        <div class="panel-body">
+          <form role="form" [formGroup]="registerForm" (ngSubmit)="onSubmit(registerForm.value)">
+            <div class="row">
+              <div class="col-xs-6 col-sm-6 col-md-6">
+                <div class="form-group">
+                  <input type="text" name="firstName" class="form-control" formControlName="firstName" class="form-control input-sm" placeholder="First Name" [ngClass]="{ 'is-invalid': submitted && f.firstName.errors }">
+                  <div *ngIf="submitted && f.firstName.errors" class="invalid-feedback"  >
+                    <div *ngIf="f.firstName.errors.required" class="text-danger">First Name is required</div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-xs-6 col-sm-6 col-md-6">
+                <div class="form-group">
+                  <input type="text" name="lastname"  class="form-control input-sm" formControlName="lastName" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.lastName.errors }" placeholder="Last Name">
+                  <div *ngIf="submitted && f.lastName.errors" class="invalid-feedback">
+                    <div *ngIf="f.lastName.errors.required" class="text-danger">Last Name is required</div>
+                </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-xs-6 col-sm-6 col-md-6">
+                <div class="form-group">
+                  <input type="text" name="Phone" class="form-control" formControlName="Phone" class="form-control input-sm" placeholder="10 digit Mobile number" maxlength="10"  [ngClass]="{ 'is-invalid': submitted && f.Phone.errors }">
+                  <div *ngIf="submitted && f.Phone.errors" class="invalid-feedback"  >
+                    <div *ngIf="f.Phone.errors.required" class="text-danger">Mobile number is required</div>
+                    <div *ngIf="f.Phone.errors.pattern" class="text-danger"> Provide Valid Mobile number</div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-xs-6 col-sm-6 col-md-6">
+                <div class="form-group">
+                  <input type="phone" name="AltPhone"  class="form-control input-sm" formControlName="AltPhone" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.AltPhone.errors }"  maxlength="10" placeholder="10 digit Alt Mobile number">
+                  <!-- <div *ngIf="submitted && f.AltPhone.errors" class="invalid-feedback">
+                    <div *ngIf="f.AltPhone.errors.required" class="text-danger">Last Name is required</div>
+                </div> -->
+                </div>
+              </div>
+            </div>
+
+
+            <div class="form-group">
+              <input type="email" name="email" formControlName="email" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.email.errors }" class="form-control input-sm" placeholder="Email Address">
+              <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
+                  <div *ngIf="f.email.errors.required" class="text-danger">Email is required</div>
+                  <div *ngIf="f.email.errors.email" class="text-danger">Email must be a valid email address</div>
+               </div>
+            </div>
+            <div class="form-group">
+              <input type="text" name="adharCard" digitOnly formControlName="adharCard" class="form-control input-sm" [ngClass]="{ 'is-invalid': submitted && f.adharCard.errors }"  maxlength="12" placeholder="AdharCard Number">
+              <div *ngIf="submitted && f.adharCard.errors" class="invalid-feedback">
+                <div *ngIf="f.adharCard.errors.required" class="text-danger">Adhar number is required</div>
+                <div *ngIf="f.adharCard.errors.pattern" class="text-danger">Plz Provide Valid Adhar Number</div>
+            </div>
+            </div>
+
+            <div class="row">
+              <div class="col-xs-6 col-sm-6 col-md-6">
+                <div class="form-group">
+                  <input type="password" name="password" formControlName="password" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.password.errors }" class="form-control input-sm" placeholder="Password">
+                  <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+                    <div *ngIf="f.password.errors.required"  class="text-danger">Password is required</div>
+                    <div *ngIf="f.password.errors.minlength" class="text-danger">Password must be at least 6 characters</div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-xs-6 col-sm-6 col-md-6">
+                <div class="form-group">
+                  <input type="password" name="confirmPasswords" formControlName="confirmPasswords" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.confirmPasswords.errors }" class="form-control input-sm" placeholder="Confirm Password">
+                  <div *ngIf="submitted && f.confirmPasswords.errors" class="invalid-feedback">
+                    <div *ngIf="f.confirmPasswords.errors.required" class="text-danger">Confirm Password is required</div>
+                    <div *ngIf="f.confirmPasswords.errors.confirmPasswordMatch" class="text-danger">Provide Password and Password must be Match</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <input type="submit" value="Register" class="btn btn-info btn-block">
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
