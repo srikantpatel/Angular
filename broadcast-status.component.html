@@ -1,0 +1,18 @@
+<nb-card>
+    <nb-card-header>
+      <div class="row">
+          <div class="col-11">
+            My Broadcasts 
+          </div>
+          <div class="col-1 float-right">
+            <ngx-icon class="ngx-icon"  [loading]="loading" (clicked)="refreshClicked()" ></ngx-icon>            
+          </div>
+      </div>
+
+       <!-- <nb-action  icon="refresh-outline" (click)="refreshBroadcastTable()"></nb-action>  -->
+    </nb-card-header>
+    <nb-card-body>
+      <ng2-smart-table class="broadcast-table" [settings]="settings" [source]="source"  (deleteConfirm)="onDeleteConfirm($event)" >
+      </ng2-smart-table>
+    </nb-card-body>
+  </nb-card>   

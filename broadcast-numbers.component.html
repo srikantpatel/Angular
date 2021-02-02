@@ -1,0 +1,116 @@
+<nb-card>
+      <nb-card-header>
+          <div class="form-group row">
+             <div class="col-10"> 
+                Create broadcast 
+            </div> 
+            <div class="col-2">
+                
+            </div>
+            </div>
+      </nb-card-header>
+  <nb-card-body>
+    <form #broadcastForm="ngForm">
+      <div class="form-group row">
+        <label for="broadcastName" class="label col-sm-2 col-form-label">Broadcast Name</label>
+        <div class="col-sm-9">
+          <input nbInput fullWidth #broadcastName="ngModel" name="broadcastName"
+            [(ngModel)]="broadcastMessage.broadcastName" id="broadcastName" ngModel type="text"
+            placeholder="Enter broadcast name here" required>
+          <div *ngIf="broadcastName.touched && broadcastName.invalid" class="alert alert-danger">
+            <div *ngIf="broadcastName.errors.required">Broadcast name is required</div>
+          </div>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label class="col-sm-2 label">Enter phone numbers</label>
+        <div class="col-sm-9">
+          <textarea nbInput fullWidth #numbers="ngModel" name="numbers" [(ngModel)]="broadcastMessage.numbers"
+            id="numbers" ngModel type="text" placeholder="Enter numbers here" rows="8" cols="40"
+            (ngModelChange)="onChange()"> </textarea>
+          <div *ngIf="numbers.touched && numbers.invalid" class="alert alert-danger">
+            <div *ngIf="numbers.errors.required">Broadcast numbers is required</div>
+          </div>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label class="col-sm-2 label">OR Select numbers from Upload : </label>
+        <div class="col-sm-6">
+          <nb-select #uploadName="ngModel" name="uploadName" placeholder=" -- Select Upload -- "
+            [(ngModel)]="broadcastMessage.uploadName" (selectedChange)="onUploadChange($event)">
+            <nb-option [value]="userUpload.filePath+','+userUpload.volume" *ngFor="let userUpload of userUploads">
+              {{userUpload.uploadName}} </nb-option>
+          </nb-select>
+          <div *ngIf="uploadName.touched && uploadName.invalid" class="alert alert-danger">
+            <div *ngIf="uploadName.errors.required">Broadcast upload is required</div>
+          </div>
+        </div>
+        <div class="col-sm-3">
+          <span> Selected {{ volume }} numbers </span>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-2"></div>
+        <div class="col-3">
+          <nb-action icon="save" title="save message" (click)="show=!show"> </nb-action>
+          <div class="row">
+            <div class="col-12" *ngIf="show">
+              <input nbInput fullWidth #templateName="ngModel" name="templateName"
+                [(ngModel)]="broadcastMessage.templateName" id="templateName" ngModel type="text"
+                placeholder="Enter Template name here" required>
+              <div *ngIf="templateName.touched && templateName.invalid" class="alert alert-danger">
+                <div *ngIf="templateName.errors.required">Template name is required</div>
+              </div>
+              <button type="submit" nbButton status="primary" (click)="saveMessage($event) || show=false">Submit</button>
+            </div>
+          </div>
+        </div>
+        <div class=" col-1">
+          <nb-action icon="trash-outline" title="delete"> </nb-action>
+        </div>
+        <div class="col-3">
+          <nb-select #templateSaveName="ngModel" name="templateSaveName" placeholder="Select Template Name"
+            [(ngModel)]="broadcastMessage.templateName">
+            <nb-option  [value]="template" *ngFor="let template of templates" >{{template.templateName}}</nb-option>
+          </nb-select>
+          <div *ngIf="templateSaveName.touched && templateSaveName.invalid" class="alert alert-danger">
+            <div *ngIf="templateSaveName.errors.required">Broadcast upload is required</div>
+          </div>
+        </div>
+        <div class="col-2">
+          Count : {{msg}}
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="broadcastName" class="label col-sm-2 col-form-label">Broadcast Message</label>
+        <div class="col-sm-9">
+          <textarea nbInput fullWidth #message="ngModel" #count name="message" [(ngModel)]="broadcastMessage.message"
+            (ngModelChange)="onChange()" id="broadcastName" ngModel type="text"
+            placeholder="Enter broadcast message here" required></textarea>
+          <div *ngIf="message.touched && message.invalid" class="alert alert-danger">
+            <div *ngIf="message.errors.required">Broadcast message is required</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label class="col-sm-2 label">Sender Id</label>
+        <div class="col-sm-9">
+          <nb-select #senderId="ngModel" name="senderId" placeholder="Select SenderId"
+            [(ngModel)]="broadcastMessage.senderId">
+            <nb-option value="MVDHFM">MVDHFM</nb-option>
+            <nb-option value="DCSOPL">DCSOPL</nb-option>
+            <nb-option value="IVRGRU">IVRGRU</nb-option>
+          </nb-select>
+        </div>
+      </div>
+      <div class="form-group row"> 
+        <div class="offset-sm-2 col-9">
+         
+          <button type="submit" nbButton status="primary" [disabled]="!broadcastForm.valid || volume==0"
+            (click)="formSubmitted($event)">  <ngx-icon *ngIf="loading" class="ngx-icon" [loading]="loading"> </ngx-icon>  Submit Broadcast </button>  
+        </div>
+      </div>
+    </form>
+  </nb-card-body>
+</nb-card>
