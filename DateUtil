@@ -1,0 +1,31 @@
+import * as moment from "moment";
+
+export class StringUtils {
+   static toTitleCase(str:string) {
+       return str != null ? str.replace(/\b\w/g, first => first.toLocaleUpperCase()) : null;
+   }
+}
+
+export class DateUtils {
+    static toDateCase(d:Date) {
+        return moment.weekdays();
+    }
+    static currentDate() {
+        return moment().format('MMM_Do_h_mm_ss');
+    }
+    static dateDiff(date:Date) {
+        let dateObj=moment(date); 
+        let time = 0;  
+        time = moment().diff(dateObj,"seconds" );
+        if(time < 60)  return ` few moments earlier`;
+        
+        time = moment().diff(dateObj,"minutes" );
+        if(time < 60) return  `${time} minutes earlier`;
+
+        time = moment().diff(dateObj,"hours" );
+        if(time < 24) return `${time} hours earlier`;
+
+        time = moment().diff(dateObj,"days" );
+        if(time >= 1) return `${time} days earlier`;
+    }
+}
