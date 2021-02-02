@@ -1,0 +1,35 @@
+<nb-card *ngIf="show">
+    <nb-card-header>
+        <div class="row">
+            <div class="col-11">
+                Add User
+            </div>
+            <div class="col-1">
+                <nb-action icon="close-outline" title="close" (click)="show=false"></nb-action>
+            </div>
+        </div>
+    </nb-card-header>
+    <nb-card-body>
+        <ngx-company-user (userAdded)="onUserAdded($event)"></ngx-company-user>
+    </nb-card-body>
+</nb-card>
+<nb-card>
+    <nb-card-header>
+        <div class="row">
+            <div class="col-10">
+                Users
+            </div>
+            <div class="col-1">
+                <nb-action icon="person-add-outline" title="add User" (click)="show=!show"></nb-action>
+            </div>
+            <div class="col-1">
+                <ngx-icon class="ngx-icon" [loading]="loading" (clicked)="refreshClicked()"></ngx-icon>
+            </div>
+        </div>
+    </nb-card-header>
+    <nb-card-body>
+        <ng2-smart-table disables [settings]="settings" [source]="companyUserList"
+            (deleteConfirm)="onDeleteConfirm($event)">
+        </ng2-smart-table>
+    </nb-card-body>
+</nb-card>
