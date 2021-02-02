@@ -1,0 +1,36 @@
+<nb-card *ngIf="show">
+    <nb-card-header>
+        <div class="row">
+            <div class="col-11">
+                Add BlackList Number
+            </div>
+            <div class="col-1">
+                <nb-action icon="close-outline" title="close" (click)="show=false"></nb-action>
+            </div>
+        </div>
+    </nb-card-header>
+    <nb-card-body>
+        <ngx-black-list></ngx-black-list>
+    </nb-card-body>
+</nb-card>
+
+<nb-card>
+    <nb-card-header>
+        <div class="row">
+            <div class="col-10">
+                Black List
+            </div>
+            <div class="col-1">
+                <nb-action icon="plus-outline" title="add BlackList Number" (click)="show=!show"></nb-action>
+            </div>
+            <div class="col-1">
+                <nb-action icon="flash-off-outline"></nb-action>
+            </div>
+        </div>
+    </nb-card-header>
+
+    <nb-card-body>
+        <ng2-smart-table [settings]="settings" [source]="senderIdData" (deleteConfirm)="onDeleteConfirm($event)">
+        </ng2-smart-table>
+    </nb-card-body>
+</nb-card>
