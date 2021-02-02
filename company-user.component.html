@@ -1,0 +1,34 @@
+    <nb-stepper #stepper> 
+      <nb-step [stepControl]="firstForm" label=" Basic Info">
+        <form [formGroup]="firstForm" (ngSubmit)="onFirstSubmit()" class="step-container">
+          <div class="input-group">
+            <input type="text" placeholder="Enter your name" class="form-control" formControlName="fullName"
+              name="fullName" [(ngModel)]="companyuser.fullName" id="fullName"  
+              [ngClass]="{'form-control-danger': firstForm.invalid && (firstForm.dirty || firstForm.touched)}">
+          </div><br>
+          <div class="input-group">
+            <input type="text" placeholder="Enter Mobile Number" class="form-control" formControlName="mobileNo"
+                name="mobileNo" [(ngModel)]="companyuser.mobileNumber"
+                [ngClass]="{'form-control-danger': firstForm.invalid && (firstForm.dirty || firstForm.touched)}">
+        </div>
+          <button nbButton nbStepperNext [disabled]="!firstForm.valid">next</button>
+        </form>
+      </nb-step>
+      <nb-step [stepControl]="secondForm" label="Enter Email">
+        <form [formGroup]="secondForm" (ngSubmit)="onSecondSubmit()" class="step-container">
+          <div class="input-group">
+            <input type="text" placeholder="Enter Email " class="form-control" formControlName="email" name="email"
+              [(ngModel)]="companyuser.email" ngModel  
+              [ngClass]="{'form-control-danger': secondForm.invalid && (secondForm.dirty || secondForm.touched)}"
+              required>
+          </div>
+          <button nbButton nbStepperPrevious>prev</button>
+          <button nbButton nbStepperNext [disabled]="!secondForm.valid" (click)="formsubmit()">Save</button>
+        </form>
+      </nb-step>
+      <nb-step [stepControl]="secondForm" [hidden]="true" label="Third step">
+        <div class="step-container">
+          <button nbButton (click)="stepper.reset()">ADD NEW</button>
+        </div>
+      </nb-step>
+    </nb-stepper>
